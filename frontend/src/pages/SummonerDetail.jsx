@@ -85,7 +85,10 @@ const SummonerDetail = () => {
             </div>
             <div className="grid gap-6 md:grid-cols-3">
               <div data-testid="summoner-detail-rank-block">
-                <p className="text-xs uppercase tracking-widest text-gold-300">
+                <p
+                  className="text-xs uppercase tracking-widest text-gold-300"
+                  data-testid="summoner-detail-rank-label"
+                >
                   Rango actual
                 </p>
                 <Badge
@@ -97,7 +100,10 @@ const SummonerDetail = () => {
                 </Badge>
               </div>
               <div data-testid="summoner-detail-current-lp-block">
-                <p className="text-xs uppercase tracking-widest text-gold-300">
+                <p
+                  className="text-xs uppercase tracking-widest text-gold-300"
+                  data-testid="summoner-detail-current-lp-label"
+                >
                   LP actual
                 </p>
                 <p
@@ -108,7 +114,10 @@ const SummonerDetail = () => {
                 </p>
               </div>
               <div data-testid="summoner-detail-lp-gained-block">
-                <p className="text-xs uppercase tracking-widest text-gold-300">
+                <p
+                  className="text-xs uppercase tracking-widest text-gold-300"
+                  data-testid="summoner-detail-lp-gained-label"
+                >
                   LP ganados
                 </p>
                 <p
@@ -135,7 +144,10 @@ const SummonerDetail = () => {
               className="bg-obsidian-700/70 border border-gold-500/20 p-6"
               data-testid="summoner-detail-baseline-card"
             >
-              <p className="text-xs uppercase tracking-widest text-gold-300">
+              <p
+                className="text-xs uppercase tracking-widest text-gold-300"
+                data-testid="summoner-detail-baseline-label"
+              >
                 Baseline registrada
               </p>
               <p
@@ -155,7 +167,10 @@ const SummonerDetail = () => {
               className="bg-obsidian-700/70 border border-gold-500/20 p-6"
               data-testid="summoner-detail-wins-card"
             >
-              <p className="text-xs uppercase tracking-widest text-gold-300">
+              <p
+                className="text-xs uppercase tracking-widest text-gold-300"
+                data-testid="summoner-detail-performance-label"
+              >
                 Rendimiento actual
               </p>
               <p
