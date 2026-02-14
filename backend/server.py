@@ -85,10 +85,10 @@ class RiotApiClient:
         )
         return await self._get(url)
 
-    async def get_league_entries(self, summoner_id: str) -> List[dict]:
+    async def get_league_entries(self, puuid: str) -> List[dict]:
         url = (
             f"https://{RIOT_PLATFORM.lower()}.api.riotgames.com/"
-            f"lol/league/v4/entries/by-summoner/{summoner_id}"
+            f"lol/league/v4/entries/by-puuid/{puuid}"
         )
         data = await self._get(url)
         return data or []
@@ -148,7 +148,7 @@ def build_response(doc: dict) -> SummonerResponse:
 
 
 async def refresh_summoner_stats(doc: dict, riot_client: RiotApiClient) -> dict:
-    league_entries = await riot_client.get_league_entries(doc["summoner_id"])
+    league_entries = await riot_client.get_league_entries(doc["puuid"])
     ranked_data = extract_ranked_data(league_entries)
     update_payload = {
         **ranked_data,
@@ -180,8 +180,7 @@ async def add_summoner(payload: SummonerCreate):
     if not summoner_data:
         raise HTTPException(status_code=404, detail="Invocador no encontrado")
 
-    summoner_id = summoner_data.get("id")
-    league_entries = await riot_client.get_league_entries(summoner_id)
+    league_entries = await riot_client.get_league_entries(puuid)
     ranked_data = extract_ranked_data(league_entries)
 
     now = datetime.now(timezone.utc)
@@ -193,7 +192,6 @@ async def add_summoner(payload: SummonerCreate):
             "riot_id": riot_id_formatted,
             "game_name": game_name,
             "tag_line": tag_line,
-            "summoner_id": summoner_id,
             "platform": RIOT_PLATFORM,
             "summoner_level": summoner_data.get("summonerLevel"),
             "profile_icon_id": summoner_data.get("profileIconId"),
@@ -212,7 +210,6 @@ async def add_summoner(payload: SummonerCreate):
         "game_name": game_name,
         "tag_line": tag_line,
         "puuid": puuid,
-        "summoner_id": summoner_id,
         "platform": RIOT_PLATFORM,
         "summoner_level": summoner_data.get("summonerLevel"),
         "profile_icon_id": summoner_data.get("profileIconId"),
