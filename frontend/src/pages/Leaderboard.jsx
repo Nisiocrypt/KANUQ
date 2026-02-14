@@ -123,7 +123,10 @@ const Leaderboard = () => {
               className="bg-obsidian-900/70 border border-hextech-400/30 p-4"
               data-testid="stats-total-summoners"
             >
-              <p className="text-xs uppercase tracking-widest text-hextech-400">
+              <p
+                className="text-xs uppercase tracking-widest text-hextech-400"
+                data-testid="stats-total-label"
+              >
                 Invocadores activos
               </p>
               <p
@@ -137,7 +140,10 @@ const Leaderboard = () => {
               className="bg-obsidian-900/70 border border-gold-400/30 p-4"
               data-testid="stats-top-gainer"
             >
-              <p className="text-xs uppercase tracking-widest text-gold-300">
+              <p
+                className="text-xs uppercase tracking-widest text-gold-300"
+                data-testid="stats-top-gainer-label"
+              >
                 Mayor progreso
               </p>
               <p
@@ -205,12 +211,42 @@ const Leaderboard = () => {
             <Table data-testid="leaderboard-table">
               <TableHeader>
                 <TableRow data-testid="leaderboard-table-header">
-                  <TableHead className="text-gold-300">#</TableHead>
-                  <TableHead className="text-gold-300">Invocador</TableHead>
-                  <TableHead className="text-gold-300">Rango actual</TableHead>
-                  <TableHead className="text-gold-300">LP actual</TableHead>
-                  <TableHead className="text-gold-300">LP ganados</TableHead>
-                  <TableHead className="text-gold-300">Victorias</TableHead>
+                  <TableHead
+                    className="text-gold-300"
+                    data-testid="leaderboard-header-position"
+                  >
+                    #
+                  </TableHead>
+                  <TableHead
+                    className="text-gold-300"
+                    data-testid="leaderboard-header-summoner"
+                  >
+                    Invocador
+                  </TableHead>
+                  <TableHead
+                    className="text-gold-300"
+                    data-testid="leaderboard-header-rank"
+                  >
+                    Rango actual
+                  </TableHead>
+                  <TableHead
+                    className="text-gold-300"
+                    data-testid="leaderboard-header-current-lp"
+                  >
+                    LP actual
+                  </TableHead>
+                  <TableHead
+                    className="text-gold-300"
+                    data-testid="leaderboard-header-lp-gained"
+                  >
+                    LP ganados
+                  </TableHead>
+                  <TableHead
+                    className="text-gold-300"
+                    data-testid="leaderboard-header-wins"
+                  >
+                    Victorias
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
