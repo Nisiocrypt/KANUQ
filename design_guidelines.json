@@ -1,0 +1,163 @@
+{
+  "design_system": {
+    "identity": {
+      "name": "Hextech Ascended",
+      "description": "A competitive, high-contrast dark theme inspired by League of Legends' Hextech technology. It combines deep obsidian backgrounds with magical blue glows and prestige gold accents to evoke a sense of elite competition.",
+      "emotional_tone": "Competitive, Mystical, Elite, High-Tech",
+      "target_audience": "League of Legends players, Tournament Organizers, Esports fans in LAS region"
+    },
+    "typography": {
+      "font_family": {
+        "headings": "Cinzel, serif",
+        "ui_data": "Rajdhani, sans-serif",
+        "body": "Inter, sans-serif"
+      },
+      "scale": {
+        "h1": "text-5xl md:text-7xl font-bold tracking-tighter uppercase",
+        "h2": "text-3xl md:text-5xl font-bold tracking-tight",
+        "h3": "text-xl md:text-2xl font-semibold tracking-wide text-gold-400",
+        "body": "text-base leading-relaxed text-slate-300",
+        "caption": "text-xs uppercase tracking-widest text-slate-500",
+        "stat_value": "text-2xl md:text-4xl font-bold font-ui-data text-white",
+        "stat_label": "text-xs font-medium text-hextech-blue-400 uppercase tracking-wider"
+      },
+      "imports": [
+        "https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@400;500;600&family=Rajdhani:wght@500;600;700&display=swap"
+      ]
+    },
+    "colors": {
+      "palette": {
+        "obsidian": {
+          "900": "#010A13",
+          "800": "#091428",
+          "700": "#0A1B30",
+          "600": "#1E282D"
+        },
+        "gold": {
+          "100": "#F0E6D2",
+          "300": "#C8AA6E",
+          "400": "#C89B3C",
+          "500": "#785A28",
+          "600": "#463714"
+        },
+        "hextech_blue": {
+          "400": "#0AC8B9",
+          "500": "#0397AB",
+          "600": "#005A82",
+          "glow": "rgba(10, 200, 185, 0.4)"
+        },
+        "magic": {
+          "purple": "#7A26C1"
+        },
+        "rank": {
+          "challenger": "#F4C874",
+          "grandmaster": "#CD4545",
+          "master": "#9D48E0",
+          "diamond": "#576BCE",
+          "platinum": "#4E9996",
+          "gold": "#FFD700",
+          "silver": "#C0C0C0",
+          "bronze": "#CD7F32",
+          "iron": "#574D4F"
+        }
+      },
+      "usage": {
+        "background_main": "bg-[#091428]",
+        "background_card": "bg-[#0A1B30]/80 backdrop-blur-md border border-[#C89B3C]/20",
+        "text_primary": "text-[#F0E6D2]",
+        "text_secondary": "text-[#A09B8C]",
+        "text_accent": "text-[#C89B3C]",
+        "border_subtle": "border-[#785A28]/30",
+        "border_active": "border-[#C89B3C]",
+        "glow_primary": "shadow-[0_0_15px_rgba(200,155,60,0.3)]",
+        "glow_hextech": "shadow-[0_0_20px_rgba(10,200,185,0.2)]"
+      }
+    },
+    "layout": {
+      "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+      "spacing": {
+        "section": "py-20 md:py-32",
+        "card_padding": "p-6 md:p-8"
+      },
+      "grid_strategies": {
+        "leaderboard": "grid grid-cols-12 gap-4 items-center p-4 border-b border-[#785A28]/20 hover:bg-[#C89B3C]/5 transition-colors",
+        "stats_bento": "grid grid-cols-1 md:grid-cols-4 gap-6"
+      }
+    },
+    "components": {
+      "buttons": {
+        "primary": "relative overflow-hidden bg-[#1E2328] border border-[#C89B3C] text-[#C89B3C] hover:bg-[#C89B3C] hover:text-[#010A13] transition-all duration-300 uppercase tracking-widest font-bold py-3 px-8 clip-path-hextech",
+        "secondary": "bg-transparent border border-[#0AC8B9] text-[#0AC8B9] hover:bg-[#0AC8B9]/10 transition-all duration-300 uppercase tracking-widest font-semibold py-2 px-6",
+        "icon": "p-2 rounded-full hover:bg-[#C89B3C]/20 text-[#C89B3C] transition-colors"
+      },
+      "cards": {
+        "summoner": "group relative bg-[#0A1B30] border border-[#785A28]/40 p-6 hover:border-[#C89B3C] transition-all duration-300 hover:shadow-[0_0_30px_rgba(200,155,60,0.15)]",
+        "stat_box": "bg-[#010A13]/50 border border-[#0AC8B9]/20 p-4 flex flex-col items-center justify-center"
+      },
+      "inputs": {
+        "search": "bg-[#010A13] border border-[#785A28] text-[#F0E6D2] placeholder-[#785A28] focus:border-[#C89B3C] focus:ring-1 focus:ring-[#C89B3C] h-12 px-4 w-full"
+      },
+      "visual_enhancers": {
+        "hex_border": "clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%)",
+        "glass_panel": "bg-[#091428]/70 backdrop-blur-xl border-t border-white/10"
+      }
+    },
+    "motion": {
+      "transitions": "transition-all duration-300 ease-out",
+      "hover_effects": "hover:-translate-y-1 hover:shadow-lg",
+      "loading": "animate-pulse bg-[#1E282D]"
+    },
+    "assets": {
+      "images": {
+        "hero_bg": {
+          "url": "https://images.unsplash.com/photo-1647029734771-53e448994b08?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzF8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMGJsdWUlMjBnb2xkJTIwbWFnaWMlMjBwYXJ0aWNsZXMlMjB0ZXh0dXJlfGVufDB8fHx8MTc3MTA0NDg1NHww&ixlib=rb-4.1.0&q=85",
+          "alt": "Abstract Hextech Magic Particles",
+          "usage": "Hero section background with overlay-opacity-20"
+        },
+        "rank_icons": {
+          "placeholder_url": "https://images.unsplash.com/photo-1624365169806-1517fcb873d7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwxfHxnb2xkJTIwc2lsdmVyJTIwYnJvbnplJTIwZmFudGFzeSUyMHJhbmslMjBiYWRnZXN8ZW58MHx8fHwxNzcxMDQ0ODc1fDA&ixlib=rb-4.1.0&q=85",
+          "note": "Use CSS borders/colors to denote rank if specific icons are unavailable. Gold = Yellow Border, Iron = Grey Border."
+        }
+      },
+      "icons": "Use Lucide React (Sword, Shield, Trophy, Search, UserPlus, Activity)"
+    }
+  },
+  "implementation_guide": {
+    "setup_steps": [
+      "Install fonts: Add Google Fonts import to index.css",
+      "Configure Tailwind: Add custom colors (obsidian, gold, hextech_blue) to tailwind.config.js",
+      "Global CSS: Add .clip-path-hextech utility class in index.css",
+      "Layout: Create a MainLayout component with the dark obsidian background and sticky glass header"
+    ],
+    "page_strategies": {
+      "home": {
+        "structure": "Hero Section (Search + CTA) -> Leaderboard Table (Top 100) -> Features Grid",
+        "key_elements": "Animated 'Rank Up' counter, Glowing Gold borders for Top 3 players"
+      },
+      "summoner_detail": {
+        "structure": "Profile Header (Icon + Level + Rank) -> LP Graph (Recharts) -> Recent Matches List",
+        "key_elements": "Large Rank Insignia (CSS/Image), Winrate Circular Progress Bar"
+      },
+      "add_summoner": {
+        "structure": "Centered Modal/Card",
+        "key_elements": "Input with 'Summoner#TAG' validation, Loading Spinner with Hextech Blue color"
+      }
+    },
+    "accessibility": {
+      "contrast": "Ensure Gold text on Obsidian background meets 4.5:1. Use lighter gold (#F0E6D2) for small text.",
+      "interactive": "All buttons must have :focus-visible styles with a glowing ring."
+    }
+  },
+  "universal_guidelines": {
+    "do_not": [
+      "Do not use pure black (#000000). Use Obsidian (#091428).",
+      "Do not use rounded corners > 8px. Keep it sharp/angular for the Hextech feel.",
+      "Do not use generic 'Bootstrap' blue. Use Teal/Cyan for magic elements."
+    ],
+    "must_do": [
+      "Use data-testid on all interactive elements.",
+      "Use 'Cinzel' font for all Section Headings.",
+      "Add a subtle noise texture overlay to the background to prevent banding."
+    ]
+  }
+}
