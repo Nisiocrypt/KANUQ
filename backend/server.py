@@ -24,6 +24,20 @@ RIOT_API_KEY = os.environ.get("RIOT_API_KEY")
 RIOT_PLATFORM = os.environ.get("RIOT_PLATFORM", "LA2")
 RIOT_REGION_ROUTING = os.environ.get("RIOT_REGION_ROUTING", "americas")
 
+TIER_ORDER = {
+    "IRON": 0,
+    "BRONZE": 1,
+    "SILVER": 2,
+    "GOLD": 3,
+    "PLATINUM": 4,
+    "EMERALD": 5,
+    "DIAMOND": 6,
+    "MASTER": 7,
+    "GRANDMASTER": 8,
+    "CHALLENGER": 9,
+}
+DIVISION_ORDER = {"IV": 0, "III": 1, "II": 2, "I": 3}
+
 app = FastAPI()
 api_router = APIRouter(prefix="/api")
 
@@ -108,12 +122,16 @@ def parse_riot_id(riot_id: str) -> Tuple[str, str]:
 def extract_ranked_data(league_entries: List[dict]) -> dict:
     for entry in league_entries:
         if entry.get("queueType") == "RANKED_SOLO_5x5":
+            tier = entry.get("tier", "UNRANKED")
+            rank = entry.get("rank", "")
+            current_lp = entry.get("leaguePoints", 0)
             return {
                 "current_lp": entry.get("leaguePoints", 0),
-                "current_tier": entry.get("tier", "UNRANKED"),
-                "current_rank": entry.get("rank", ""),
+                "current_tier": tier,
+                "current_rank": rank,
                 "wins": entry.get("wins", 0),
                 "losses": entry.get("losses", 0),
+                "current_points": compute_rank_points(tier, rank, current_lp),
             }
     return {
         "current_lp": 0,
@@ -121,12 +139,27 @@ def extract_ranked_data(league_entries: List[dict]) -> dict:
         "current_rank": "",
         "wins": 0,
         "losses": 0,
+        "current_points": 0,
     }
 
 
 def build_response(doc: dict) -> SummonerResponse:
     baseline_lp = doc.get("baseline_lp", 0)
     current_lp = doc.get("current_lp", 0)
+    current_points = doc.get("current_points")
+    baseline_points = doc.get("baseline_points")
+    if baseline_points is None:
+        baseline_points = compute_rank_points(
+            doc.get("current_tier"),
+            doc.get("current_rank"),
+            baseline_lp,
+        )
+    if current_points is None:
+        current_points = compute_rank_points(
+            doc.get("current_tier"),
+            doc.get("current_rank"),
+            current_lp,
+        )
     updated_at = doc.get("updated_at") or doc.get("created_at")
     return SummonerResponse(
         id=str(doc.get("_id")),
@@ -138,7 +171,7 @@ def build_response(doc: dict) -> SummonerResponse:
         current_rank=doc.get("current_rank", ""),
         wins=doc.get("wins", 0),
         losses=doc.get("losses", 0),
-        lp_gained=current_lp - baseline_lp,
+        lp_gained=current_points - baseline_points,
         baseline_lp=baseline_lp,
         baseline_set_at=doc.get("baseline_set_at") or updated_at,
         updated_at=updated_at,
@@ -154,6 +187,12 @@ async def refresh_summoner_stats(doc: dict, riot_client: RiotApiClient) -> dict:
         **ranked_data,
         "updated_at": datetime.now(timezone.utc),
     }
+    if doc.get("baseline_points") is None:
+        update_payload["baseline_points"] = compute_rank_points(
+            ranked_data.get("current_tier"),
+            ranked_data.get("current_rank"),
+            doc.get("baseline_lp", ranked_data.get("current_lp", 0)),
+        )
     await summoners_collection.update_one(
         {"_id": doc["_id"]},
         {"$set": update_payload},
@@ -215,6 +254,9 @@ async def add_summoner(payload: SummonerCreate):
         "summoner_level": summoner_data.get("summonerLevel"),
         "profile_icon_id": summoner_data.get("profileIconId"),
         "baseline_lp": ranked_data["current_lp"],
+        "baseline_points": ranked_data.get("current_points", 0),
+        "baseline_tier": ranked_data.get("current_tier", "UNRANKED"),
+        "baseline_rank": ranked_data.get("current_rank", ""),
         "baseline_set_at": now,
         "created_at": now,
         "updated_at": now,
