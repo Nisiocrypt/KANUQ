@@ -119,6 +119,20 @@ def parse_riot_id(riot_id: str) -> Tuple[str, str]:
     return game_name, tag_line
 
 
+def compute_rank_points(tier: Optional[str], rank: Optional[str], lp: int) -> int:
+    if not tier or tier == "UNRANKED":
+        return 0
+    tier_key = tier.upper()
+    tier_index = TIER_ORDER.get(tier_key)
+    if tier_index is None:
+        return 0
+    base_points = tier_index * 400
+    if tier_key in {"MASTER", "GRANDMASTER", "CHALLENGER"}:
+        return base_points + lp
+    division_points = DIVISION_ORDER.get((rank or "").upper(), 0) * 100
+    return base_points + division_points + lp
+
+
 def extract_ranked_data(league_entries: List[dict]) -> dict:
     for entry in league_entries:
         if entry.get("queueType") == "RANKED_SOLO_5x5":
