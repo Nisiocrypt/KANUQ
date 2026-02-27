@@ -28,6 +28,8 @@ const rankStyleMap = {
 };
 
 const formatLp = (value) => (value >= 0 ? `+${value}` : `${value}`);
+const formatUpdatedAt = (value) =>
+  value ? new Date(value).toLocaleString("es-CL") : "--";
 
 const Leaderboard = () => {
   const [summoners, setSummoners] = useState([]);
@@ -253,6 +255,12 @@ const Leaderboard = () => {
                   >
                     Victorias
                   </TableHead>
+                  <TableHead
+                    className="text-gold-300"
+                    data-testid="leaderboard-header-updated"
+                  >
+                    Actualizado
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -353,6 +361,12 @@ const Leaderboard = () => {
                         data-testid={`leaderboard-wins-${summoner.id}`}
                       >
                         {summoner.wins}
+                      </TableCell>
+                      <TableCell
+                        className="text-xs text-gold-300 whitespace-nowrap"
+                        data-testid={`leaderboard-updated-${summoner.id}`}
+                      >
+                        {formatUpdatedAt(summoner.updated_at)}
                       </TableCell>
                     </TableRow>
                   );
