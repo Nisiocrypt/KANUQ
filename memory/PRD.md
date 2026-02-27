@@ -14,6 +14,7 @@ Necesito que hagas una página pública para rankear usuarios según el LP que g
 - Ranking público por LP ganados con lógica anti-descenso de rango.
 - Invocador Azthiels#exest agregado al circuito.
 - Indicador de burla (emoji) para quienes están por debajo de Azthiels#exest.
+- Detección de cambios de rango (sube/baja) mostrada en dashboard y detalle.
 - Ranking público por LP ganados con refresco desde Riot API.
 - Detalle de invocador (LP actual, LP ganados, baseline, W/L, rango actual).
 - Gestión de invocadores con lista y navegación.
